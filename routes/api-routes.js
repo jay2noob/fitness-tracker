@@ -1,52 +1,6 @@
-const Workout = require("../models/workout");
+const Exercise = require("../models/exercise");
 const router = require("express").Router();
 const path = require("path");
-
-router.get("/api/workouts", (req, res) => {
-  console.log(req.body);
-
-  Workout.find({})
-    .then(Workout => {
-      res.json(Workout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-router.post("/api/workouts", (req, res) => {
-  console.log(req.body);
-
-  Workout.create({
-    exercises: []
-  })
-    .then(Workout => {
-      res.json(Workout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-router.put("/api/workouts/:id", (req, res) => {
-  Workout.update({ _id: req.params.id }, { $push: { exercises: req.body } })
-    .then(Workout => {
-      res.json(Workout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
-
-router.get("/api/workouts/range", (req, res) => {
-  Workout.find({})
-    .then(Workout => {
-      res.json(Workout);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-});
 
 router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
@@ -58,6 +12,52 @@ router.get("/exercise", (req, res) => {
 
 router.get("/stats", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/stats.html"));
+});
+
+router.get("/api/exercises", (req, res) => {
+  console.log(req.body);
+
+  Exercise.find({})
+    .then(workout => {
+      res.json(workout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.post("/api/exercises", (req, res) => {
+  console.log(req.body);
+
+  Exercise.create({
+    exercises: []
+  })
+    .then(workout => {
+      res.json(workout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.put("/api/exercises/:id", (req, res) => {
+  Exercise.update({ _id: req.params.id }, { $push: { exercises: req.body } })
+    .then(workout => {
+      res.json(workout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
+});
+
+router.get("/api/exercises/range", (req, res) => {
+  Exercise.find({})
+    .then(workout => {
+      res.json(workout);
+    })
+    .catch(err => {
+      res.json(err);
+    });
 });
 
 module.exports = router;
