@@ -14,7 +14,7 @@ router.get("/stats", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/stats.html"));
 });
 
-router.get("/api/exercises", (req, res) => {
+router.get("/api/workouts", (req, res) => {
   console.log(req.body);
 
   Exercise.find({})
@@ -26,7 +26,7 @@ router.get("/api/exercises", (req, res) => {
     });
 });
 
-router.post("/api/exercises", (req, res) => {
+router.post("/api/workouts", (req, res) => {
   console.log(req.body);
 
   Exercise.create({
@@ -40,7 +40,7 @@ router.post("/api/exercises", (req, res) => {
     });
 });
 
-router.put("/api/exercises/:id", (req, res) => {
+router.put("/api/workouts/:id", (req, res) => {
   Exercise.update({ _id: req.params.id }, { $push: { exercises: req.body } })
     .then(workout => {
       res.json(workout);
@@ -50,7 +50,7 @@ router.put("/api/exercises/:id", (req, res) => {
     });
 });
 
-router.get("/api/exercises/range", (req, res) => {
+router.get("/api/workouts/range", (req, res) => {
   Exercise.find({})
     .then(workout => {
       res.json(workout);
